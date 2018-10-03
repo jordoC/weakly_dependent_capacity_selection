@@ -5,8 +5,12 @@ rv_len = 10000;
 l = 4;  %group size
 N = l;  %num TX ants
 
-sigma_n = 1.1;
+sigma_n = 0.1;
 
+%The columns and depth dimension represent a given user.
+%The rows are indices betwen users.
+%Indices are (column,depth,row)
+%Note that each user has N independent vectors. There are l different users.
 h_mat = (1/sqrt(2*N))*(randn(rv_len,l,l) + i*randn(rv_len,l,l));
 
 clear h_norm_orth_mat;
