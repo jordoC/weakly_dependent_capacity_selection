@@ -1,8 +1,6 @@
 %Statistical analysis for maximum sum rate for a collection of users in a fading channel with MRT beamforming.
-% The 
 
 rv_len = 10000;
-
 %NOTE: l cannot be = 1!!!
 % the sums used below will reduce the random vectors to scalars if l = 1
 % (ie. the rows will be summed instead of the columns)
@@ -13,8 +11,9 @@ catch me
     error(['Group size l (%i) out of range (l must be > 1). Error details: %s'],...
         l, me.message)
 end
-N = l;  %num TX ants
-n = 4;  %size of candidate set
+N = 4;          %num TX ants
+tx_power = 1;   %total tx power in Watts
+n = 6;          %size of candidate set
 
 sigma_n = 0.1;  %noise variance
 
@@ -72,7 +71,8 @@ for sus_group_idx = 1:num_groups
                 intf_sum = intf_sum + (h_norm_orth_mat(:,h_norm_idx, h_orth_idx).^2);
             end
         end
-        sinr(:,h_norm_idx) = h_norm_orth_mat(:,h_norm_idx, h_norm_idx)./(intf_sum + sigma_n);
+        sinr(:,h_norm_idx) = (tx_power/N)*h_norm_orth_mat(:,h_norm_idx, h_norm_idx)./...
+            ((tx_power/N)*intf_sum + sigma_n);
         cap(:,h_norm_idx) = log2(1+sinr(:,h_norm_idx));
     end
     sus_groups_sinr{sus_group_idx} = sinr;
