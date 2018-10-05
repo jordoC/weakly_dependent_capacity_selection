@@ -1,10 +1,10 @@
 %Statistical analysis for maximum sum rate for a collection of users in a fading channel with MRT beamforming.
 
-rv_len = 10000;
+rv_len = 1000;
 %NOTE: l cannot be = 1!!!
 % the sums used below will reduce the random vectors to scalars if l = 1
 % (ie. the rows will be summed instead of the columns)
-l = 2;  %group size
+l = 3;  %group size
 try
     assert(l>1);
 catch me
@@ -102,7 +102,7 @@ end
 %build up to evaluate the multi-var cdf, marginal pdf on
 mu = mean_vec(1);
 sigma = sqrt(cov_mat(1,1));
-x = mu+(-2*sigma:sigma/10:8*sigma); %bounds of grid are estimated from first rv
+x = mu+(-2*sigma:sigma/30:6*sigma); %bounds of grid are estimated from first rv
 x_grid = [];
 for x_dim_idx = 1:num_groups
     x_grid = [x_grid x'];
