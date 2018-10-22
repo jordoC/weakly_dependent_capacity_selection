@@ -4,6 +4,7 @@ n = 100;
 num_groups = nchoosek(n,l);
 
 mu = 1.19;
+sigma = 0.5910;
 rho = 1/l;
 
 
